@@ -1,0 +1,214 @@
+#!/bin/bash
+#
+# ~~~ Переменная " Зделай выбор: " ~~~
+a=" Зделай выбор: "
+# ~~~ Перепоказать содержание ~~~
+ function bashContent()
+  {
+   clear
+   cat content.txt
+  }
+# ~~~ Показать текст ~~~
+ function showText()
+  {
+   clear
+   echo "~~~ Показать текст ~~~"
+   PS3=$a
+   options=("echo" "Показать скрипт echo" "cat" "Показать скрипт cat" "Вернуться")
+   select opt in "${options[@]}"
+    do
+     case $opt in
+      "echo")
+        echo " Текст показан"
+      ;;
+      "Показать скрипт echo")
+        echo " echo \"\""
+      ;;
+      "cat")
+        cat text.txt
+      ;;
+      "Показать скрипт cat")
+        echo "cat text.txt"
+      ;;
+      "Вернуться")
+        bashContent
+        break
+      ;;
+     esac
+    done
+  }
+# ~~~ Показать функцию ~~~
+ function showFunction()
+  {
+   clear
+   echo "~~~ Показать функцию ~~~"
+   PS3=$a
+   options=("function" "Показать скрипт function" "Вернуться")
+   select opt in "${options[@]}"
+    do
+     case $opt in
+      "function")
+        ./bashFunction
+      ;;
+      "Показать скрипт function")
+        cat bashFunction
+      ;;
+      "Вернуться")
+        bashContent
+        break
+      ;;
+     esac
+    done
+  }
+# ~~~ Показать переменную ~~~
+ function showVariable()
+  {
+   clear
+   echo "~~~ Показать переменную ~~~"
+   PS3=$a
+   options=("Переменная" "Показать скрипт файла переменная" "Вернуться")
+   select opt in "${options[@]}"
+    do
+     case $opt in
+      "Переменная")
+        ./bashVariable
+      ;;
+      "Показать скрипт файла переменная")
+        cat bashVariable
+      ;;
+      "Вернуться")
+        bashContent
+        break
+      ;;
+     esac
+    done
+  }
+# ~~~ Показать переменную времени ~~~
+ function showDate()
+  {
+   clear
+   echo "~~~ Показать переменную времени ~~~"
+   PS3=$a
+   options=("Переменная времени" "Показать скрипт файла bashDate" "Вернуться")
+   select opt in "${options[@]}"
+    do
+     case $opt in
+      "Переменная времени")
+        ./bashDate
+      ;;
+      "Показать скрипт файла bashDate")
+        cat bashDate
+      ;;
+      "Вернуться")
+        bashContent
+        break
+      ;;
+     esac
+    done
+  }
+# ~~~ Показать цикл ~~~
+ function showCycle()
+  {
+   clear
+   echo "~~~ Показать цикл ~~~"
+   PS3=$a
+   options=("Первая запись цикла"\
+            "Показать скрипт файла первая запись цикла"\
+            "Ещё цикл"\
+            "Показать скрипт файла вторая запись цикла"\
+            "Цикл с переменной внутри"\
+            "Показать скрипт файла цикл с переменной внутри"\
+            "Вычислить факториал"\
+            "Вернуться")
+   select opt in "${options[@]}"
+    do
+     case $opt in
+      "Первая запись цикла")
+        ./bashCycleA
+      ;;
+      "Показать скрипт файла первая запись цикла")
+        cat bashCycleA
+      ;;
+      "Ещё цикл")
+        ./bashCycleB
+      ;;
+      "Показать скрипт файла вторая запись цикла")
+        cat bashCycleB
+      ;;
+      "Цикл с переменной внутри")
+        ./bashCycleC
+      ;;
+      "Показать скрипт файла цикл с переменной внутри")
+        cat bashCycleC
+      ;;
+      "Вычислить факториал")
+        ./bashFactorial
+      ;;
+      "Вернуться")
+        bashContent
+        break
+      ;;
+     esac
+    done
+  }
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+clear
+echo "   +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+   |   БАШ СКРИПТЫ | BASH SCRIPTS  |
+   +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+"
+PS3=$a
+options=("Английский алфавит"\
+         "Вывод текста"\
+         "Функция"\
+         "Переменная"\
+         "Переменная времени"\
+         "Цикл"\
+         "Переменная read"\
+         "Ссылки в интернете"\
+         "Следи за синтаксисом"\
+         "Редактировать файл bashEditing"\
+         "Выход из программы")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Английский алфавит")
+            echo "a b c d e f g h i j k l m n o p q r s t u v w x y z"
+            ;;
+        "Вывод текста")
+            showText
+            ;;
+        "Функция")
+            showFunction
+            ;;
+        "Переменная")
+            showVariable
+            ;;
+        "Переменная времени")
+            showDate
+            ;;
+        "Цикл")
+            showCycle
+            ;;
+        "Читать переменную read")
+            echo "Читать переменную read"
+            ;;
+        "Ссылки в интернете")
+            echo "https://www.opennet.ru/docs/RUS/bash_scripting_guide/"
+            ;;
+        "Следи за синтаксисом")
+            echo "Пока всё нормально."
+            ;;
+        "Редактировать файл bashEditing")
+            ne BashEditing
+            ;;
+        "Показать скрипт файла переменная")
+            cat bashVariable
+            ;;
+        "Выход из программы")
+            clear
+            break
+            ;;
+        *) echo " Неправильный ввод данных | Incorrect data entry $REPLY";;
+    esac
+done
+exit 0

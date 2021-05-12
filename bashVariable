@@ -1,0 +1,6 @@
+#!/bin/bash
+v1="hello"
+v2=" "
+v3=world
+v4=$v1$v2$v3
+echo $v4
